@@ -19,6 +19,4 @@
 - No checkmate detection
 - Queen Only promotion
 - Basic UI
-- No guidance for the player
-- No multiplayer
-- If a player leaves the next player joins in same room
+- No guidance options for moving for the player
