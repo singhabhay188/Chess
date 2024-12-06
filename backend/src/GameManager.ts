@@ -7,9 +7,18 @@ class GameManager{
     games: Game[];
     pendingPlayer: WebSocket | null;
 
-    constructor(){
+    private static instance: GameManager;
+
+    private constructor(){
         this.games = [];
         this.pendingPlayer = null;
+    }
+
+    public static getInstance(): GameManager{
+        if(!GameManager.instance){
+            GameManager.instance = new GameManager();
+        }
+        return GameManager.instance;
     }
 
     connectPlayer(socket: WebSocket){
