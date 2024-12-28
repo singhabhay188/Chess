@@ -41,14 +41,18 @@ export default function ChessBoard({board, from, setFrom, socket, color}) {
             <div id="board" className="grid grid-cols-8 grid-rows-8">
                 {
                     board.map((row, i) => 
-                        row.map((item, j) => 
-                            <div 
-                                key={`${i}${j}`} 
-                                onClick={() => handleClick(i, j)}  
-                                className={`h-[35px] w-[35px] sm:h-[50px] sm:w-[50px] center text-xl md:text-2xl font-semibold ${(i + j) % 2 === 0 ? 'bg-[#ebecd0]' : 'bg-[#779556]'} ${color === 'b' ? 'rotate-180' : ''}`}>
-                                {item ? <img src={pieceSVGs[item.type+item.color]} alt={item.type} className={`w-full h-full`} /> : ''}
-                            </div>
-                        )
+                        row.map((item, j) => {
+                            const square = String.fromCharCode(97 + j) + (8 - i);
+                            const isSelected = from === square;
+                            return (
+                                <div 
+                                    key={`${i}${j}`} 
+                                    onClick={() => handleClick(i, j)}  
+                                    className={`h-[35px] w-[35px] sm:h-[50px] sm:w-[50px] center text-xl md:text-2xl font-semibold ${(i + j) % 2 === 0 ? 'bg-[#ebecd0]' : 'bg-[#779556]'} ${isSelected ? 'border-4 border-yellow-500' : ''} ${color === 'b' ? 'rotate-180' : ''}`}>
+                                    {item ? <img src={pieceSVGs[item.type+item.color]} alt={item.type} className={`w-full h-full`} /> : ''}
+                                </div>
+                            );
+                        })
                     )
                 }
             </div>
